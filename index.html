@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notatniczek dla jasia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body >
+    <div id="notatniczek">
+        <h1 id="title">
+            Przypominajki oraz Dziennik życiowy
+        </h1>
+        <h2 style="text-align: center;color: #4307e7;">
+       
+        </h2>
+        <div id='buttons'>
+
+            <button onclick="addCard()"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            
+            Dodaj wpisik
+        </button>
+        <button onclick="toggleDelete()"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+        </svg>
+        
+        Usuń karteczki
+    </button>
+</div>
+<p contenteditable="true" class="paragraf">aaaa</p>
+    <div class="notatki" id="notatki">
+
+                <!-- <div class="card" id="notecard-1">
+                    <div class="card-controls">
+<input type="text" oninput="updateCard('title')">
+<input type="number" min="1" max="5" value="3" oninput="updateCard('prio')">
+
+<button class="trash" onclick="deleteCard()"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" >
+    <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+  </svg>
+  </button>
+                    </div>
+                    <div class="card-content">
+                        <textarea oninput="updateCard('content')">
+
+                        </textarea>
+                    </div>
+                </div> -->
+
+            </div>
+    </div>
+    </div>
+
+   <script src="script.js"></script>
+    <!-- <script>
+        const noteBox = document.getElementById('notatki')
+        const noteCard = 'notecard-';
+        let deleteMode = false;
+        let cards = findCards();
+        generateCards();
+
+        function findCards(){
+            const matched = [];
+
+            for (let i = 0; i < localStorage.length; i++) {
+              const key = localStorage.key(i);
+              if (key.includes(noteCard)) {
+                matched.push(key);
+              }
+            }
+          
+            return matched;
+        }
+
+        function toggleDelete(){
+            deleteMode = !deleteMode
+            const elements = noteBox.querySelectorAll(`[id*="${noteCard}"]`);
+
+            if(deleteMode){
+                elements.forEach((element)=>
+                {
+                   const button = element.querySelector('button')
+                button.innerHTML ='<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" ><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg>'
+                button.style.backgroundColor = 'red'
+            })
+            }else{
+                elements.forEach((element)=>
+                {
+                    const button = element.querySelector('button')
+                    button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>' 
+                button.style.backgroundColor = 'blue'
+                })
+            }
+
+            
+        }
+
+
+        function generateCards(){
+            cards.forEach((key)=>{
+                const item = JSON.parse(localStorage.getItem(key))
+                console.log(item)
+                const card = document.createElement('div');
+                const controls = document.createElement('div');
+                const content = document.createElement('div');
+        
+                const title = document.createElement('input');
+                const priority = document.createElement('input')
+                const button = document.createElement('button')
+                const textarea = document.createElement('textarea');
+        
+                card.className = 'card'
+                controls.className = 'card-controls'
+                content.className = 'card-content'
+                button.className = 'trash'
+                if(deleteMode){
+                    button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" ><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg>'
+                } else{
+                  button.innerHTML =  '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>' 
+                }
+                
+                title.setAttribute('type', 'text');
+            title.value = item.title;
+            priority.setAttribute('type', 'number')
+            priority.setAttribute('min', '1')
+            priority.setAttribute('max', '5')
+            priority.value =item.prio
+            textarea.value=item.content
+
+            if(item.done === true){
+                controls.style.backgroundColor = 'green'
+             card.style.opacity = '0.5'
+             title.disabled = true;
+             priority.disabled = true;
+             textarea.disabled = true;
+            } 
+
+            title.setAttribute('oninput',"updateCard('title')")
+            priority.setAttribute('oninput',"updateCard('prio')")
+            button.setAttribute('onclick', 'changeCard()')
+            textarea.setAttribute('oninput',"updateCard('content')")
+
+            controls.appendChild(title)
+            controls.appendChild(priority)
+            controls.appendChild(button)
+
+            content.appendChild(textarea)
+
+            card.appendChild(controls)
+            card.appendChild(content)
+
+            card.setAttribute('id', item.id)
+            noteBox.appendChild(card)
+            })
+
+        }
+        
+
+        function addCard(){
+            const card = document.createElement('div');
+            const controls = document.createElement('div');
+            const content = document.createElement('div');
+    
+            const title = document.createElement('input');
+            const priority = document.createElement('input')
+            const button = document.createElement('button')
+            const textarea = document.createElement('textarea');
+    
+            card.className = 'card'
+            controls.className = 'card-controls'
+            content.className = 'card-content'
+            button.className = 'trash'
+            if(deleteMode){
+                button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" ><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg>'
+            } else{
+              button.innerHTML =  '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>' 
+            }
+    
+            title.setAttribute('type', 'text');
+            title.setAttribute('value', 'Tytuł');
+            priority.setAttribute('type', 'number')
+            priority.setAttribute('min', '1')
+            priority.setAttribute('max', '5')
+            priority.setAttribute('value', '3')
+            
+            title.setAttribute('oninput',"updateCard('title')")
+            priority.setAttribute('oninput',"updateCard('prio')")
+            button.setAttribute('onclick', 'changeCard()')
+            textarea.setAttribute('oninput',"updateCard('content')")
+
+            controls.appendChild(title)
+            controls.appendChild(priority)
+            controls.appendChild(button)
+
+            content.appendChild(textarea)
+
+            card.appendChild(controls)
+            card.appendChild(content)
+
+            const cardValues = {id: noteCard+localStorage.length, title: title.value, prio: priority.value, content: textarea.value, done: false}
+            card.setAttribute('id', cardValues.id)
+
+            localStorage.setItem(cardValues.id, JSON.stringify(cardValues))
+            noteBox.appendChild(card)
+        }
+
+        function updateCard(whereto, item = null){
+            let cardItem;
+            if(item === null){
+                cardItem = event.target.parentNode.parentNode
+            } else {
+                cardItem = item
+            }
+            console.log(cardItem)
+            cardValues = JSON.parse(localStorage.getItem(cardItem.id))
+            if(whereto === 'done'){
+                cardValues[whereto] = !cardValues.done;
+            } else {
+                cardValues[whereto] = event.target.value;
+            }
+            localStorage.setItem(cardItem.id, JSON.stringify(cardValues))
+            console.log('card updated!', cardItem.id, cardValues)  
+        }
+
+        function changeCard(){
+            let cardItem = event.target;
+            if(event.target.nodeName === 'path'){
+                cardItem = event.target.parentNode.parentNode.parentNode.parentNode
+            }
+            else if(event.target.nodeName === 'svg'){
+                cardItem = event.target.parentNode.parentNode.parentNode
+            } else if (event.target.nodeName === 'BUTTON'){
+                cardItem = event.target.parentNode.parentNode
+            }
+
+            if(deleteMode){
+               
+                console.log(event.target.nodeName)
+                console.log(cardItem)
+                
+                localStorage.removeItem(cardItem.id)
+                noteBox.removeChild(cardItem)
+            }
+            else{
+                const inputs = cardItem.querySelectorAll('input')
+                const textarea = cardItem.querySelector('textarea')
+                inputs.forEach((input)=>{
+                    input.disabled = true
+                })
+                textarea.disabled = true
+                updateCard('done', cardItem)
+                cardValues = JSON.parse(localStorage.getItem(cardItem.id))
+                console.log(cardValues.done)
+               const controls = cardItem.querySelector('.card-controls')
+               if(cardValues.done === true){
+                   controls.style.backgroundColor = 'green'
+                cardItem.style.opacity = '0.5'
+               } else {
+                controls.style.backgroundColor = 'brown'
+                cardItem.style.opacity = '1'
+               }
+            
+            }
+        }
+    </script> -->
+</body>
+
+</html>
